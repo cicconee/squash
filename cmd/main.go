@@ -16,7 +16,10 @@ func main() {
 	r := chi.NewRouter()
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		payload := map[string]interface{}{
-			"message": "success",
+			"message":      "success",
+			"remote_addr":  r.RemoteAddr,
+			"real_ip":      r.Header.Get("X-REAL-IP"),
+			"forwaded_for": r.Header.Get("X-FORWARDED-FOR"),
 		}
 
 		data, _ := json.Marshal(payload)
