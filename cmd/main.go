@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"flag"
 	"net/http"
 
@@ -13,6 +14,16 @@ var service = flag.String("s", "", "specify the microservice to run")
 func main() {
 	teamHandler := team.NewHandler()
 	r := chi.NewRouter()
+	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
+		payload := map[string]interface{}{
+			"message": "success",
+		}
+
+		data, _ := json.Marshal(payload)
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		w.Write(data)
+	})
 	r.Get("/teams", teamHandler.Create)
-	http.ListenAndServe(":5000", r)
+	http.ListenAndServe(":5001", r)
 }
