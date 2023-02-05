@@ -25,5 +25,5 @@ func main() {
 		w.Write(data)
 	})
 	r.Get("/teams", teamHandler.Create)
-	http.ListenAndServe(":5001", r)
+	http.ListenAndServe(":3000", r)
 }

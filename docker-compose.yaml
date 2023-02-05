@@ -7,7 +7,7 @@ services:
     container_name: go-api
     hostname: go-api
     ports: 
-      - "3000:5000"
+      - "8080:3000"
     deploy:
       restart_policy:
         condition: unless-stopped
